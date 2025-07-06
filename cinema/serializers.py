@@ -33,8 +33,13 @@ class ActorSerializer(serializers.Serializer):
         return Actor.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.first_name = validated_data.get("first_name", instance.first_name)
-        instance.last_name = validated_data.get("last_name", instance.last_name)
+        instance.first_name = validated_data.get(
+            "first_name",
+            instance.first_name
+        )
+        instance.last_name = validated_data.get(
+            "last_name", instance.last_name
+        )
         instance.save()
         return instance
 
@@ -57,6 +62,7 @@ class CinemaHallSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
     rows = serializers.IntegerField()
     seats_in_row = serializers.IntegerField()
+    capacity = serializers.ReadOnlyField()
 
     def create(self, validated_data):
         return CinemaHall.objects.create(**validated_data)

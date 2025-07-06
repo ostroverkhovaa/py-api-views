@@ -24,6 +24,10 @@ class CinemaHall(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def capacity(self):
+        return self.rows * self.seats_in_row
+
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
